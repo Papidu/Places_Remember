@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from remembers.models import RememberCards
+
+admin.site.register(RememberCards)
