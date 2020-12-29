@@ -2,3 +2,8 @@
 .coverage
 cover_result.txt
 db.sqlite3
+venv
+htmlcov
+__pycache__
+
+commands
