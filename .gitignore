@@ -1,0 +1,4 @@
+.idea
+.coverage
+cover_result.txt
+db.sqlite3
