@@ -25,7 +25,7 @@ SECRET_KEY = 'p^buy@a3_rj#g#*njg*hj1zaws@xs6td6wdu_du$4^$fh6egy3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['papidudevtest.org', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'social_django',
 
     'remembers',
 ]
@@ -74,6 +75,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Places_Remember.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -123,3 +128,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '222867219308894'
+SOCIAL_AUTH_FACEBOOK_SECRET = '25f40fcf0f3ed3dddd05d06f6892923b'
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'locale': 'ru_RU',
+  'fields': 'id, name, email, age_range'
+}
