@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import SimpleRouter
-from remembers.views import RememberCardsViewSet
+from remembers.views import RememberCardsViewSet, welcome_windows
 
 router = SimpleRouter()
 
-router.register(r'remembercards', RememberCardsViewSet)
+router.register(r'api/aremembercards', RememberCardsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', welcome_windows),
 ]
 
 urlpatterns += router.urls
