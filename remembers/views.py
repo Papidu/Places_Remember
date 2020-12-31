@@ -14,3 +14,8 @@ class RememberCardsViewSet(ModelViewSet):
 def welcome_windows(request):
     return render(request, "index.html")
 
+
+def auth(request):
+    return render(request, 'auth.html')
+
+
