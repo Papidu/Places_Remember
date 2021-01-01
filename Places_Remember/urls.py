@@ -25,9 +25,9 @@ router.register(r'api/aremembercards', RememberCardsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', welcome_windows),
     url('', include('social_django.urls', namespace='social')),
     path('auth/', auth)
+    path('', welcome_windows)
 ]
 
 urlpatterns += router.urls

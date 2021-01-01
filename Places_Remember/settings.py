@@ -76,6 +76,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Places_Remember.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -92,10 +96,6 @@ DATABASES = {
     }
 }
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -135,11 +135,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+SOCIAL_AUTH_FACEBOOK_KEY = '222867219308894'
+SOCIAL_AUTH_FACEBOOK_SECRET = '25f40fcf0f3ed3dddd05d06f6892923b'
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'locale': 'ru_RU',
+  'fields': 'id, name, email, age_range'
+}
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-SOCIAL_AUTH_GITHUB_KEY = '68d90d2149bf2e6407d6'
-SOCIAL_AUTH_GITHUB_SECRET = '43a00c27af7d7f827e2b633ae53df681f589be23'

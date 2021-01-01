@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.template.context_processors import request
 from rest_framework.viewsets import ModelViewSet
 
 from .models import RememberCards
