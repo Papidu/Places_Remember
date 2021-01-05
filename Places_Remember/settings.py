@@ -10,11 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+from ctypes import CDLL
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+if os.name == 'nt':
+    import platform
+
+    OSGEO4W = r"C:\OSGeo4W"
+    if '64' in platform.architecture()[0]:
+        OSGEO4W += "64"
+    assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
+    os.environ['OSGEO4W_ROOT'] = OSGEO4W
+    os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
+    os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
+    os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -27,7 +38,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['floating-sea-39932.herokuapp.com', 'localhost', '127.0.0.1']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,12 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 
     'rest_framework',
     'social_django',
+    'leaflet',
 
     'remembers',
 ]
+# GDAL_LIBRARY_PATH = r'C:\OSGeo4W64\bin\gdal202'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,14 +90,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Places_Remember.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-
+# 'ENGINE': 'django.contrib.gis.db.backends.postgis', 'django.db.backends.postgresql_psycopg2',
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'remembers_db',
         'USER': 'postgres',
         'PASSWORD': '1',
@@ -115,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -129,7 +141,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
@@ -137,9 +148,22 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-SOCIAL_AUTH_GITHUB_KEY = '68d90d2149bf2e6407d6'
-SOCIAL_AUTH_GITHUB_SECRET = '43a00c27af7d7f827e2b633ae53df681f589be23'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+SOCIAL_AUTH_FACEBOOK_KEY = '222867219308894'
+SOCIAL_AUTH_FACEBOOK_SECRET = '25f40fcf0f3ed3dddd05d06f6892923b'
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (37.6171875, 55.78275147606406),
+    'DEFAULT_ZOOM': 10,
+    'MAX_ZOOM': 30,
+    'MIN_ZOOM': 5,
+    'SCALE': 'both',
+}

@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', welcome_windows),
     url('', include('social_django.urls', namespace='social')),
-    path('auth/', auth)
+    path('auth/', auth),
+    path('', include('remembers.urls'))
 ]
 
 urlpatterns += router.urls
