@@ -7,4 +7,8 @@ htmlcov
 __pycache__
 
 commands
+<<<<<<< HEAD
 Places_Remember/settings/local.py
+=======
+settings/local.py
+>>>>>>> 940484ef2c557c93fab3d81f5209bae27f70aae8
