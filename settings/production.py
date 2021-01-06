@@ -34,7 +34,7 @@ if os.name == 'nt':
 SECRET_KEY = 'p^buy@a3_rj#g#*njg*hj1zaws@xs6td6wdu_du$4^$fh6egy3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['floating-sea-39932.herokuapp.com', 'localhost', '127.0.0.1']
 
