@@ -7,3 +7,4 @@ htmlcov
 __pycache__
 
 commands
+Places_Remember/settings/local.py

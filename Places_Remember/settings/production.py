@@ -13,8 +13,7 @@ import os
 from ctypes import CDLL
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 if os.name == 'nt':
     import platform
@@ -39,7 +38,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['floating-sea-39932.herokuapp.com', 'localhost', '127.0.0.1']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,10 +55,11 @@ INSTALLED_APPS = [
 
     'remembers',
 ]
+# GDAL_LIBRARY_PATH = r'C:\OSGeo4W64\bin\gdal202'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -90,15 +89,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Places_Remember.wsgi.application'
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-
+# 'ENGINE': 'django.contrib.gis.db.backends.postgis', 'django.db.backends.postgresql_psycopg2',
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -109,8 +103,10 @@ DATABASES = {
         'PORT': '',
     }
 }
+
 import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
+
+db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 AUTHENTICATION_BACKENDS = (
@@ -136,7 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -150,14 +145,24 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#STATIC_ROOT = "/home/cfedeploy/webapps/cfehome_static_root/"
+
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -168,10 +173,6 @@ REST_FRAMEWORK = {
 
 SOCIAL_AUTH_FACEBOOK_KEY = '222867219308894'
 SOCIAL_AUTH_FACEBOOK_SECRET = '25f40fcf0f3ed3dddd05d06f6892923b'
-# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-#   'locale': 'ru_RU',
-#   'fields': 'id, name, email, age_range'
-# }
 
 LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (37.6171875, 55.78275147606406),
