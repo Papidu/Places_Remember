@@ -105,12 +105,14 @@ DATABASES = {
 }
 
 import dj_database_url
-host = "ec2-52-205-61-60.compute-1.amazonaws.com"
-user = "asrpxjficvfxbk"
-
-db_from_env = dj_database_url.config(conn_max_age=600, default=f"postgis://{user}:PASSWORD@{host}:5432/df70mrje4dvl1o")
-DATABASES['default'].update(db_from_env)
+DATABASES['default'] = dj_database_url.config()
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
+if os.getenv('DYNO'):
+    GDAL_LIBRARY_PATH = os.path.expandvars(os.getenv('GDAL_LIBRARY_PATH'))
+    GEOS_LIBRARY_PATH = os.path.expandvars(os.getenv('GEOS_LIBRARY_PATH'))
+    DATABASES['default'] =  dj_database_url.parse(os.getenv('DATABASE_URL'),'django.contrib.gis.db.backends.postgis')
+    print(DATABASES['default'])
 
 
 AUTHENTICATION_BACKENDS = (
