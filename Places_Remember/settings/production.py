@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
 
     'rest_framework',
+    'rest_framework_gis',
     'social_django',
     'leaflet',
 
@@ -104,9 +105,12 @@ DATABASES = {
     }
 }
 
-import dj_database_url
-# DATABASES['default'] = dj_database_url.config()
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config(conn_max_age=500)
+# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
+GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
+GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if os.getenv('DYNO'):
     GDAL_LIBRARY_PATH = os.path.expandvars(os.getenv('GDAL_LIBRARY_PATH'))
