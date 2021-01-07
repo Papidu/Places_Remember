@@ -1,13 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
-# from django.contrib.gis.db.models import PointField
+from django.contrib.gis.db.models import PointField
 from django.db.models import Manager as GeoManager
 
 
 class RememberCards(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     location_name = models.CharField(max_length=255)
-    location = models.FloatField#PointField(srid=4326)
+    location = PointField(srid=4326)
     image = models.CharField(max_length=255)
     notes = models.TextField(blank=True, null=True)
 
