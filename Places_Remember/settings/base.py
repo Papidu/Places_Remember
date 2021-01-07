@@ -61,7 +61,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -108,7 +107,8 @@ DATABASES = {
 
 print(DATABASES['default'])
 import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+prod_db = dj_database_url.config()
+DATABASES['default'].update(prod_db)
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 print(DATABASES['default'])
 print("------------------------------------")
