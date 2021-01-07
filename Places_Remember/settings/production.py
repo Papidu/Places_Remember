@@ -105,8 +105,10 @@ DATABASES = {
 }
 
 import dj_database_url
+host = "ec2-52-205-61-60.compute-1.amazonaws.com"
+user = "asrpxjficvfxbk"
 
-db_from_env = dj_database_url.config()
+db_from_env = dj_database_url.config(conn_max_age=600, default=f"postgis://{user}:PASSWORD@{host}:5432/df70mrje4dvl1o")
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
