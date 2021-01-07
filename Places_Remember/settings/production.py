@@ -181,3 +181,5 @@ LEAFLET_CONFIG = {
     'MIN_ZOOM': 5,
     'SCALE': 'both',
 }
+import django_heroku
+django_heroku.settings(locals())
