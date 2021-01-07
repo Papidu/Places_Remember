@@ -105,10 +105,12 @@ DATABASES = {
     }
 }
 
-# import dj_database_url
-# DATABASES['default'] = dj_database_url.config(conn_max_age=500)
-# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-
+import dj_database_url
+prod_db = dj_database_url.config(default="postgis://asrpxjficvfxbk:bba041de4abb7cf500fdc18f7030d8bff0c2973325861981c4af01172efc5469@ec2-52-205-61-60.compute-1.amazonaws.com:5432/df70mrje4dvl1o")
+DATABASES['default'].update(prod_db)
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+print(DATABASES['default'])
+print("------------------------------------")
 GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
