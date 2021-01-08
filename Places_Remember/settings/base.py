@@ -106,17 +106,17 @@ DATABASES = {
 }
 
 
-import dj_database_url
-prod_db = dj_database_url.config(default="postgis://asrpxjficvfxbk:bba041de4abb7cf500fdc18f7030d8bff0c2973325861981c4af01172efc5469@ec2-52-205-61-60.compute-1.amazonaws.com:5432/df70mrje4dvl1o")
-DATABASES['default'].update(prod_db)
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-print(DATABASES['default'])
-print("------------------------------------")
-if os.getenv('DYNO'):
-    GDAL_LIBRARY_PATH = os.path.expandvars(os.getenv('GDAL_LIBRARY_PATH'))
-    GEOS_LIBRARY_PATH = os.path.expandvars(os.getenv('GEOS_LIBRARY_PATH'))
-    DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'),'django.contrib.gis.db.backends.postgis')
-    print(DATABASES['default'])
+# import dj_database_url
+# prod_db = dj_database_url.config(default="postgis://asrpxjficvfxbk:bba041de4abb7cf500fdc18f7030d8bff0c2973325861981c4af01172efc5469@ec2-52-205-61-60.compute-1.amazonaws.com:5432/df70mrje4dvl1o")
+# DATABASES['default'].update(prod_db)
+# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+# print(DATABASES['default'])
+# print("------------------------------------")
+# if os.getenv('DYNO'):
+#     GDAL_LIBRARY_PATH = os.path.expandvars(os.getenv('GDAL_LIBRARY_PATH'))
+#     GEOS_LIBRARY_PATH = os.path.expandvars(os.getenv('GEOS_LIBRARY_PATH'))
+#     DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'),'django.contrib.gis.db.backends.postgis')
+#     print(DATABASES['default'])
 
 
 

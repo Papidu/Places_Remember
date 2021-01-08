@@ -2,3 +2,4 @@ dfgdfgfgdsdsvvvvvvvvvvvvvvvvv
 GDAL==3.2.0
 osgeo==0.0.0
 OSGeo-Easy==0.0.1.dev16
+web: gunicorn Places_Remember.wsgi --log-file -

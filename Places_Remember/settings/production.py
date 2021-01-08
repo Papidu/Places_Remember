@@ -94,6 +94,9 @@ WSGI_APPLICATION = 'Places_Remember.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # 'ENGINE': 'django.contrib.gis.db.backends.postgis', 'django.db.backends.postgresql_psycopg2',
+import dj_database_url
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -106,6 +109,7 @@ DATABASES = {
 }
 
 import dj_database_url
+
 prod_db = dj_database_url.config(default="postgis://asrpxjficvfxbk:bba041de4abb7cf500fdc18f7030d8bff0c2973325861981c4af01172efc5469@ec2-52-205-61-60.compute-1.amazonaws.com:5432/df70mrje4dvl1o")
 DATABASES['default'].update(prod_db)
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
