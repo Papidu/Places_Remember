@@ -1,0 +1,15 @@
+{% extends 'remembers/base.html' %}
+{% load static %}
+{% load leaflet_tags %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% block title %}Добавить карточку{% endblock %}
+{% block head %}
+    {% load leaflet_tags %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+{% endblock %}
+{% block content %}
+     {% leaflet_map "my_map" %}
+{% endblock %}
+

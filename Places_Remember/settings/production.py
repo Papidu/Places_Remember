@@ -34,7 +34,7 @@ if os.name == 'nt':
 SECRET_KEY = 'p^buy@a3_rj#g#*njg*hj1zaws@xs6td6wdu_du$4^$fh6egy3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['floating-sea-39932.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'social_django',
     'leaflet',
+    'djgeojson',
 
     'remembers',
 ]
@@ -83,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+
             ],
         },
     },
@@ -109,8 +112,6 @@ DATABASES = {
 }
 
 import dj_database_url
-
-
 
 # prod_db = dj_database_url.config(default="postgis://asrpxjficvfxbk:bba041de4abb7cf500fdc18f7030d8bff0c2973325861981c4af01172efc5469@ec2-52-205-61-60.compute-1.amazonaws.com:5432/df70mrje4dvl1o")
 # DATABASES['default'].update(prod_db)

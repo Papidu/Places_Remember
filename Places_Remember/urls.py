@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
-from remembers.views import RememberCardsViewSet, welcome_windows, auth
+from remembers.views import RememberCardsViewSet, auth
 
 router = SimpleRouter()
 
@@ -25,10 +25,9 @@ router.register(r'api/aremembercards', RememberCardsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', welcome_windows),
     url('', include('social_django.urls', namespace='social')),
     path('auth/', auth),
-    path('', include('remembers.urls'))
+    path(r'', include('remembers.urls'))
 ]
 
 urlpatterns += router.urls

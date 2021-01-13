@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'social_django',
     'leaflet',
+    'djgeojson',
 
     'remembers',
 ]
@@ -94,16 +95,16 @@ WSGI_APPLICATION = 'Places_Remember.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # 'ENGINE': 'django.contrib.gis.db.backends.postgis', 'django.db.backends.postgresql_psycopg2',
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'remembers_db',
-        'USER': 'postgres',
-        'PASSWORD': '1',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'remembers_db',
+#         'USER': 'postgres',
+#         'PASSWORD': '1',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 # import dj_database_url
@@ -146,7 +147,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -188,5 +189,4 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 10,
     'MAX_ZOOM': 30,
     'MIN_ZOOM': 5,
-    'SCALE': 'both',
 }

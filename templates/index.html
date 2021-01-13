@@ -1,13 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Remember places</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js" integrity="sha512-eGYNRo+9eOOAd/b4UZR8f2IdWNO3+6XrJMb5M1/wPvSUA7ABpSAT7uexDGt7fNfqhwVGI1L+0lEUm/n7ZqiL9A==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.js" integrity="sha512-bYkaBWaFtfPIMYt9+CX/4DWgfrjcHinjerNYxQmQx1VM76eUsPPKZa5zWV8KksVkBF/DaHSADCwil2J5Uq2ctA==" crossorigin="anonymous"></script>
-</head>
-<body>
+{% extends 'remembers/base.html' %}
+
+{% block title %}Добавить воспоминание{% endblock %}
+{% block content %}
+    <div class="container">
+        {{ map }}
+    </div>
+
+    <div class="container">
+        <h2>Привет, {{ user }}</h2>
+        <h2>Давай запомним воспоминание</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.location_name }}<br>
+            {{ form.location }}<br>
+            {{ form.image }}<br>
+            {{ form.notes }}<br>
+            <input type="text" placeholder="Воспоминание о " class="form-control"><br>
+            <input type="text" placeholder="Карта " class="form-control"><br>
+            <input type="file" name="file" placeholder="Добавь сюда фотографию" class="form-control"><br>
+            <p><textarea name="comment" placeholder="Заметки"></textarea></p><br>
+            <button class="btn btn-success" type="submit">Запомнить</button>
+        </form>
+    </div>
+{#    <div class="container">#}
+{#        <div id="map"></div>#}
+{#    </div>#}
+
+
+
+    {% for i in data %}
+        <div class="container">
+            <h1>{{   i.user }}</h1>
+            <p>{{  i.location_name }}</p>
+            <p>{{  i.location }}</p>
+            <p>{{  i.image }}</p>
+            <p>{{  i.notes }}</p>
+        </div>
+    {% endfor %}
 {% verbatim %}
 <div class="container" id="form">
     <div class="btn btn-success bnt-lf"  v-for="order in orders">
@@ -21,7 +50,30 @@
     </div>
 </div>
 {% endverbatim %}
-<script src="/static/app.js"></script>
+{#<script type="text/javascript">#}
+{#    // Определяем переменную map#}
+{#    let map;#}
+{#    // Функция initMap которая отрисует карту на странице#}
+{#    function initMap() {#}
+{#        map = new google.maps.Map(document.getElementById('map'), {#}
+{#            center: {lat: -34.397, lng: 150.644},#}
+{#            zoom: 15#}
+{#        });#}
+{#    }#}
+{#    let marker = new google.maps.Marker({#}
+{#        position: {lat: 55.760186, lng: 37.618711},#}
+{#        map: map,#}
+{#    });#}
+{##}
+{#    google.maps.event.addListener(marker, 'click', function() {#}
+{#        document.location='http://google.com';#}
+{#    });#}
+{##}
+{#    </script>#}
+{#    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaETG3aeLpUBvURKmOp_qkaZ7X0Ru6E_M&callback=initMap" async defer></script>#}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+{#<script src="/static/app.js"></script>#}
+<script src="../static/app.js"></script>
 
-</body>
-</html>
+
+{% endblock %}
